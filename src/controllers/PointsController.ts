@@ -48,15 +48,45 @@ export class PointsController {
         );
     }
 
-    public async get(request: Request, response: Response){
+    public async getById(request: Request, response: Response){
+        
         const { id } = request.params;
 
-        const point = await knex('points').where('id', id).first();
+        const point = await knex('points')
+            .where('id', id)
+            .first();
 
-        if(!point)
-            return response.status(404).json({message: 'Point not found'});
+        if(!point){
+            return response
+                .status(404)
+                .json({message: 'Point not found'});
+        }
+
+        const items = await knex('items')
+            .join('point_items', 'items.id', '=', 'point_items.item_id')
+            .where('point_items.point_id', id)
+            .select('items.title');
+            
+        return response.json({point, items});
+    }
+
+    public async get(request: Request, response: Response){
+        const { uf, city, items } = request.query;
+
+        const parsedItems = String(items)
+            .split(',')
+            .map(item => Number(item.trim()));
+            
+        const points = await knex('points')
+            .join('point_items', 'points.id', '=', 'point_items.point_id')
+            .whereIn('point_items.item_id', parsedItems)
+            .where('city', String(city))
+            .where('uf', String(uf))
+            .distinct()
+            .select('points.*');
+
+        return response.json(points);
         
-        return response.json(point);
     }
 
 }
