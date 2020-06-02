@@ -1,0 +1,17 @@
+
+//points(pontos de coleta)
+// image
+// name
+// email
+// latitude
+// longitude
+// city
+// uf
+
+//items(Itens para coleta)
+// image
+// title
+
+//points_itens(N-N)
+// points_id
+// itens_id
