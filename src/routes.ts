@@ -30,7 +30,7 @@ routes.post('/points', async (request, response) => {
         items
     } = request.body;
     
-    await knex('points').insert({
+    const ids = await knex('points').insert({
         name,
         email,
         whatsapp,
@@ -40,6 +40,15 @@ routes.post('/points', async (request, response) => {
         city,
         image: 'fake'
     });
+
+    const pointItems = items.map((item_id: number) => {
+        return {
+            item_id,
+            point_id: ids[0]
+        };
+    });
+
+    await knex('point_items').insert(pointItems);
 
     return response.json({sucess: true});
 });
