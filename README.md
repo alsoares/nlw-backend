@@ -11,3 +11,6 @@ Utiliza ts-node-dev para ficar observando alterações.
 
 ### `npm run knex:migrate`
 Criação de banco de dados
+
+### `npm run knex:seed`
+Insert inicial no banco de dados
