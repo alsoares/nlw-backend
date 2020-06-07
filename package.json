@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --transpileOnly --ignore-watch node_modules ./src/server.ts",
-    "knex:migrate": "knex --knexfile knexfile.ts migrate:latest",
-    "knex:seed": "knex --knexfile knexfile.ts seed:run",
-    "start": "npm run build && npm run knex:migrate && npm run knex:seed && node ./dist/src/server.js",
-    "build": "npm install && tsc"
+    "knex:migrate": "knex --knexfile ./dist/knexfile.ts migrate:latest",
+    "knex:seed": "knex --knexfile ./dist/knexfile.ts seed:run",
+    "start": "npm run build && node ./dist/src/server.js",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -17,8 +17,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "knex": "^0.21.1",
-    "sqlite3": "^4.2.0",
-    "typescript": "^3.9.3"
+    "sqlite3": "^4.2.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.6",
