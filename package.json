@@ -7,7 +7,7 @@
     "dev": "ts-node-dev --transpileOnly --ignore-watch node_modules ./src/server.ts",
     "knex:migrate": "knex --knexfile ./dist/knexfile.ts migrate:latest",
     "knex:seed": "knex --knexfile ./dist/knexfile.ts seed:run",
-    "start": "npm run build && node ./dist/src/server.js",
+    "start": "node ./dist/src/server.js",
     "build": "tsc"
   },
   "keywords": [],
