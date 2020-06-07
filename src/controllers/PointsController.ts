@@ -25,7 +25,7 @@ export class PointsController {
             longitude,
             uf,
             city,
-            image: 'fake'
+            image: 'https://pegaki.com.br/wp-content/uploads/2019/05/Loja.png'
         };
         const insertedIds = await trx('points').insert(point);
     
